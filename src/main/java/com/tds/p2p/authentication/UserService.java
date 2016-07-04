@@ -6,11 +6,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserService {
+
+    /**
+     * Get current login user
+     *
+     * @return Current login user
+     */
     public User getCurrentUser() {
-        return (User)SecurityContextHolder
+        return (User) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
-
     }
 }

@@ -1,28 +1,52 @@
 <#-- @ftlvariable name="_csrf" type="org.springframework.security.web.csrf.CsrfToken" -->
-<!DOCTYPE HTML>
-<head>
-    <title>Getting Started: Serving Web Content</title>
+<#import "common/include.ftl" as inc>
+<#import "spring.ftl" as spring>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<@inc.head head=head>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.29.5/react-bootstrap.min.js"></script>
-    <script src="js/login/login.js"></script>
+<link rel="stylesheet" href="css/sign-form.css"/>
 
-</head>
-<body>
+<div class="container">
 
-<div class="container" id="container">
+    <form class="form-sign" action="login" method="post" data-toggle="validator" role="form">
 
+        <@inc.csrf/>
+
+        <h2 class="form-sign-heading"><@spring.message code='message.signin'/></h2>
+
+        <div class="form-group">
+
+            <label for="inputPhone" class="sr-only">
+                <@spring.message code="field.phone" />
+            </label>
+
+            <input type="text" maxlength="11" minlength="11"
+                   id="inputPhone" class="form-control" pattern="^\d+$"
+                   placeholder="<@spring.message code="field.phone" />"
+                   data-match-error="<@spring.message code='error.require_password'/>"
+                   required autofocus>
+        </div>
+
+        <div class="form-group">
+            <label for="inputPassword" class="sr-only"><@spring.message code='field.password'/></label>
+            <input type="password" id="inputPassword" class="form-control" required
+                   data-match-error="<@spring.message code='error.require_password'/>"
+                   placeholder="<@spring.message code='field.password'/>">
+
+            <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> <@spring.message code='field.rememberme'/>
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">
+                <@spring.message code='label.login'/>
+            </button>
+        </div>
+    </form>
 </div>
 
-
-</body>
-</html>
-
-<script type="text/babel">
-    ReactDOM.render(<FormExample />, document.getElementById("container"));
-</script>
+</@inc.head>
