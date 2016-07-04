@@ -17,7 +17,7 @@ public class UserController {
     private ModelAndView showUserInformation() {
 
         ModelAndView mav = new ModelAndView("user/user_index");
-        mav.addObject("currentUser", userService.getCurrentUser());
+//        mav.addObject("currentUser", userService.getCurrentUser());
 
         return mav;
     }
